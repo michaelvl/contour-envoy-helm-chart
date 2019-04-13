@@ -30,6 +30,8 @@ spec:
           {{- range .Values.contour.args }}
           - {{ . }}
           {{- end }}
+          - --ingress-class-name
+          - {{ .Values.contour.ingressClassName }}
       - image: "{{ .Values.envoy.image.repository }}:{{ .Values.envoy.image.tag }}"
         imagePullPolicy: {{ .Values.envoy.image.pullPolicy }}
         resources:

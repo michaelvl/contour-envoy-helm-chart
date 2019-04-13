@@ -1,0 +1,24 @@
+helmRepos:
+  stagingrepo: "https://raw.githubusercontent.com/MichaelVL/contour-envoy-helm-chart/master/"
+
+namespaces:
+  contour-int:
+  contour-ext:
+
+apps:
+  contour-int:
+    chart: "stagingrepo/contour"
+    version: "0.2.1"
+    enabled: true
+    namespace: "contour-int"
+    set:
+      contour.ingressClassName: "internal"
+      crd.create: false
+
+  contour-ext:
+    chart: "stagingrepo/contour"
+    version: "0.2.1"
+    enabled: true
+    namespace: "contour-ext"
+    set:
+      contour.ingressClassName: "external"

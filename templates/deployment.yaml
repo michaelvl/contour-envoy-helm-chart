@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: {{ template "contour.fullname" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+  name: {{ template "contour.fullname" . }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ template "contour.fullname" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  replicas: {{ .Values.deployment.replicas }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ template "contour.fullname" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+      annotations:
+{{ toYaml .Values.contour.annotations | indent 8 }}
+    spec:
+      containers:
+      - image: "{{ .Values.contour.image.repository }}:{{ .Values.contour.image.tag }}"
+        imagePullPolicy: {{ .Values.contour.image.pullPolicy }}
+        name: {{ template "contour.name" . }}
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+        command: [{{ .Values.contour.command | quote}}]
+        args:
+          {{- range .Values.contour.args }}
+          - {{ . }}
+          {{- end }}
+      - image: "{{ .Values.envoy.image.repository }}:{{ .Values.envoy.image.tag }}"
+        imagePullPolicy: {{ .Values.envoy.image.pullPolicy }}
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+        name: {{ .Values.envoy.container.name }}
+        ports:
+          - containerPort: {{ .Values.service.internalHttpPort }}
+            name: http
+          - containerPort: {{ .Values.service.internalHttpsPort }}
+            name: https
+        command: [{{ .Values.envoy.command  | quote}}]
+        args:
+          {{- range .Values.envoy.args }}
+          - {{ .  }}
+          {{- end }}
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8002
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        volumeMounts:
+        - name: contour-config
+          mountPath: /config
+        lifecycle:
+          preStop:
+            exec:
+              command: ["wget", "-qO-", "http://localhost:9001/healthcheck/fail"]
+      initContainers:
+      - image: "{{ .Values.contour.image.repository }}:{{ .Values.contour.image.tag }}"
+        imagePullPolicy: {{ .Values.contour.image.pullPolicy }}
+        name: {{ .Values.initcontainer.name }}
+        command: [{{ .Values.initcontainer.command | quote }}]
+        args:
+          {{- range .Values.initcontainer.args }}
+          - {{ . }}
+          {{- end }}
+        volumeMounts:
+        - name: contour-config
+          mountPath: /config
+      volumes:
+      - name: contour-config
+        emptyDir: {}
+      dnsPolicy: ClusterFirst
+      serviceAccountName: {{ template "contour.serviceAccountName" . }}
+      terminationGracePeriodSeconds: 30
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: {{ template "contour.fullname" . }}
+                  app.kubernetes.io/instance: {{ .Release.Name }}
+              topologyKey: kubernetes.io/hostname

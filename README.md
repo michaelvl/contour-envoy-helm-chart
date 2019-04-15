@@ -3,7 +3,9 @@ with support for customizing the ingress class name and hence run two ingress
 controllers on two externally exposed services.
 
 The use-case for this is internal and external services with e.g. ACLs limiting
-access to the internal services.
+access to the internal services, which is illustrated below.
+
+![Externa and internal ingresses](ingress_int_ext.png)
 
 An example deployment is shown in the [Helmsman deployment
 file](deployment/helmsman.yaml), and example workload in the `example-workload`

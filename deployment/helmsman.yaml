@@ -8,7 +8,7 @@ namespaces:
 apps:
   contour-int:
     chart: "stagingrepo/contour"
-    version: "0.2.1"
+    version: "0.2.3"
     enabled: true
     namespace: "contour-int"
     set:
@@ -17,7 +17,7 @@ apps:
 
   contour-ext:
     chart: "stagingrepo/contour"
-    version: "0.2.1"
+    version: "0.2.3"
     enabled: true
     namespace: "contour-ext"
     set:

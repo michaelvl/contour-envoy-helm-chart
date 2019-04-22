@@ -3,21 +3,16 @@ entries:
   contour:
   - apiVersion: v1
     appVersion: v0.9.0
-    created: 2019-04-22T16:19:38.106678019+02:00
+    created: 2019-04-22T17:56:31.660065462+02:00
     description: Contour envoy based ingress controller installation
-    digest: 997ab99c535deb002c4cc2ee82dfd853c9fb9da598edd32229cacad9af48536a
+    digest: 5cc26de0e8ce7abd819d539582ddb4dbd07debf04db9294970114bb3832ecf69
     home: https://github.com/heptio/contour
     keywords:
     - ingress
     - envoy
     - contour
-    maintainers:
-    - email: jensonc8@gmail.com
-      name: Jenson
-    - email: singh.sankalp1@gmail.com
-      name: Sankalp
     name: contour
     urls:
-    - http://127.0.0.1:8879/contour-0.2.2.tgz
-    version: 0.2.2
-generated: 2019-04-22T16:19:38.106160674+02:00
+    - http://127.0.0.1:8879/contour-0.2.3.tgz
+    version: 0.2.3
+generated: 2019-04-22T17:56:31.658553962+02:00

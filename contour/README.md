@@ -36,7 +36,7 @@ The default configuration values for this chart are listed in `values.yaml`.
 | `contour.image.pullPolicy`            | Image pull policy                                            | IfNotPresent                                             |
 | `contour.command`                     | Command for contour pod                                      | contour                                           |
 | `contour.args`                        | Contour run command arguments                                | `[]`                                              |
-| `contour.annotations`                 | Annotations for Contour deployment                           | `{}`                                              |
+| `contour.annotations`                 | Annotations to enable prometheus monitoring                  | `{}`                                              |
 | `envoy.image.repository`              | Repository for envoy container image                         | docker.io/envoyproxy/envoy-alpine                 |
 | `envoy.image.tag`                     | Envoy image tag                                              | v1.9.0                                            |
 | `envoy.image.pullPolicy`              | Image pull policy                                            | IfNotPresent                                      |

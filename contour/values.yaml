@@ -10,10 +10,6 @@ contour:
     - serve
     - --incluster
   annotations:
-    prometheus.io/scrape: "true"
-    prometheus.io/port: "8002"
-    prometheus.io/path: "/stats"
-    prometheus.io/format: "prometheus"
   ingressClassName: "contour"
 crd:
   create: true
@@ -43,6 +39,10 @@ service:
     contour.heptio.com/max-connections: "10000"
     cloud.google.com/load-balancer-type: "Internal"
     contour.heptio.com/max-requests: "1024"
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8000"
+    prometheus.io/path: "/metrics"
+    prometheus.io/format: "prometheus"
   externalHttpPort: 80
   internalHttpPort: 8080
   externalHttpsPort: 443

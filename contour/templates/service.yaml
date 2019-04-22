@@ -19,6 +19,10 @@ spec:
    name: https
    protocol: {{ .Values.service.protocol }}
    targetPort: {{ .Values.service.internalHttpsPort }}
+ - port: 8000
+   name: metrics
+   protocol: TCP
+   targetPort: 8000
  selector:
     app.kubernetes.io/name: {{ template "contour.fullname" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}

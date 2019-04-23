@@ -13,6 +13,6 @@ entries:
     - contour
     name: contour
     urls:
-    - https://github.com/MichaelVL/contour-envoy-helm-chart/blob/master/contour-0.2.3.tgz
+    - https://raw.githubusercontent.com/MichaelVL/contour-envoy-helm-chart/master/contour-0.2.3.tgz
     version: 0.2.3
 generated: 2019-04-22T17:56:31.658553962+02:00

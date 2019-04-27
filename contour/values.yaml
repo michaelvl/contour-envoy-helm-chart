@@ -11,9 +11,8 @@ contour:
     - --incluster
   annotations:
     prometheus.io/scrape: "true"
-    prometheus.io/port: "8000"
-    prometheus.io/path: "/metrics"
-    prometheus.io/format: "prometheus"
+    prometheus.io/port: "8002"
+    prometheus.io/path: "/stats/prometheus"
   ingressClassName: "contour"
 crd:
   create: true

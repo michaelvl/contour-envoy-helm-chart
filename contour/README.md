@@ -52,7 +52,7 @@ The default configuration values for this chart are listed in `values.yaml`.
 | `service.internalHttpPort`            | Service internal http port                                   | 8080                                              |
 | `service.internalHttpsPort`           | Service internal https port                                  | 8443                                              |
 | `service.protocol`                    | Service Protocol                                             | TCP                                               |
-| `service.loadBalancerType`            | Service Load Balancer type                                   | LoadBalancer                                      |
+| `service.type`                        | Service type                                                 | LoadBalancer                                      |
 | `rbac.create`                         | Create rbac role for contour                                 | true                                              |
 | `serviceAccount.create`               | Create service account for contour                           | true                                              |
 | `serviceAccount.name`                 | Service account name                                         |                                                   |
@@ -77,7 +77,7 @@ helm init
 ```
 Install or upgrade contour
 ```
-helm upgrade --install contour --namespace contour --set service.loadBalancerType=ClusterIP .
+helm upgrade --install contour --namespace contour --set service.type=ClusterIP .
 ```
 
 If you don't have an application ready to run with Contour, you can explore with [kuard](https://github.com/kubernetes-up-and-running/kuard).

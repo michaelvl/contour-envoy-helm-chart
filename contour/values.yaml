@@ -24,7 +24,7 @@ envoy:
   command: envoy
   args:
     - --config-path /config/contour.yaml
-    - --service-cluster cluster0
+#    - --service-cluster cluster0
     - --service-node node0
     - --log-level info
     - --v2-config-only
@@ -47,7 +47,11 @@ service:
   externalHttpsPort: 443
   internalHttpsPort: 8443
   protocol: TCP
-  loadBalancerType: LoadBalancer
+  type: LoadBalancer
+  loadBalancerIP: ""
+  nodePorts:
+    http: ""
+    https: ""
 rbac:
   create: true
 serviceAccount:

@@ -15,11 +15,20 @@ spec:
    name: http
    protocol: {{ .Values.service.protocol }}
    targetPort: {{ .Values.service.internalHttpPort }}
+   {{- if (and (eq .Values.service.type "NodePort") (not (empty .Values.service.nodePorts.http))) }}
+   nodePort: {{ .Values.service.nodePorts.http }}
+   {{- end }}
  - port: {{ .Values.service.externalHttpsPort }}
    name: https
    protocol: {{ .Values.service.protocol }}
    targetPort: {{ .Values.service.internalHttpsPort }}
+   {{- if (and (eq .Values.service.type "NodePort") (not (empty .Values.service.nodePorts.https))) }}
+   nodePort: {{ .Values.service.nodePorts.https }}
+   {{- end }}
  selector:
     app.kubernetes.io/name: {{ template "contour.fullname" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
- type: {{ .Values.service.loadBalancerType }}
+ type: {{ .Values.service.type }}
+{{- if .Values.service.loadBalancerIP }}
+  loadBalancerIP: "{{ .Values.service.loadBalancerIP }}"
+{{- end }}

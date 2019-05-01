@@ -3,6 +3,20 @@ entries:
   contour:
   - apiVersion: v1
     appVersion: v0.9.0
+    created: 2019-05-01T16:54:29.170806037+02:00
+    description: Contour envoy based ingress controller installation
+    digest: 36bb34d2d1e77065b42a0c5d9a1f7ce32e92c10919a9c1a6012a4ca4ac4bdc09
+    home: https://github.com/heptio/contour
+    keywords:
+    - ingress
+    - envoy
+    - contour
+    name: contour
+    urls:
+    - https://raw.githubusercontent.com/MichaelVL/contour-envoy-helm-chart/master/contour-0.2.5.tgz
+    version: 0.2.5
+  - apiVersion: v1
+    appVersion: v0.9.0
     created: 2019-04-27T16:34:09.354963441+02:00
     description: Contour envoy based ingress controller installation
     digest: 8f1caebb8eb35487cb337822786d327cc70fc88debc8a101b2a158a07add651a
